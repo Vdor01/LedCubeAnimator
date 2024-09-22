@@ -30,7 +30,7 @@ function handleFiles() {
         let lastX = data.lastIndexOf("x")
         loopCount = data.substring(lastX + 1)
         // console.log(loopCount)
-        // if (loopCount == 0) staticCube()
+        if (separateLines[1].length == 4096 * 6) staticCube()
 
         let tmp = data
         for (let i = 0; i < 2; i++) {
@@ -277,7 +277,7 @@ let prev = 0
 let delay = 50
 
 function render() {
-    if (isFile) {
+    if (isFile && separateLines[1].length != 4096 * 6) {
         let now = new Date().getTime()
 
         if (now - prev > delay) {
