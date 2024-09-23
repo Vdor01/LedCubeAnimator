@@ -1,8 +1,5 @@
 import * as THREE from "three"
 import { OrbitControls } from "three/addons/controls/OrbitControls.js"
-import { Timer } from "three/addons/misc/Timer.js"
-
-// const _ = require("lodash")
 
 const inputElement = document.getElementById("input")
 
@@ -29,7 +26,6 @@ function handleFiles() {
         let data = separateLines[0]
         let lastX = data.lastIndexOf("x")
         loopCount = data.substring(lastX + 1)
-        // console.log(loopCount)
         if (separateLines[1].length == 4096 * 6) staticCube()
 
         let tmp = data
@@ -97,24 +93,7 @@ function init() {
 
     scene.add(line)
 
-    // const geometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize);
     const geometry = new THREE.SphereGeometry(cubeSize / 2)
-    // const material = new THREE.MeshPhongMaterial({
-    // 	color: 0x00ff00,
-    // 	flatShading: true,
-    // });
-
-    // for ( let i = 0; i < 500; i ++ ) {
-
-    // 	const mesh = new THREE.Mesh( geometry, material );
-    // 	mesh.position.x = Math.random() * 1600 - 800;
-    // 	mesh.position.y = 0;
-    // 	mesh.position.z = Math.random() * 1600 - 800;
-    // 	mesh.updateMatrix();
-    // 	mesh.matrixAutoUpdate = false;
-    // 	scene.add( mesh );
-
-    // }
 
     for (let x = 0; x < 16; x++) {
         let floor = []
@@ -135,13 +114,10 @@ function init() {
                 scene.add(mesh)
                 row.push(mesh)
             }
-            // console.log(row.length)
             floor.push(row)
         }
-        // console.log(floor.length)
         cube.push(floor)
     }
-    // console.log(cube)
 
     // lights
 
@@ -161,33 +137,6 @@ function init() {
     window.addEventListener("resize", onWindowResize)
 }
 
-const throttleFunction = (func, delay) => {
-    // Previously called time of the function
-    let prev = 0
-    return (...args) => {
-        // Current called time of the function
-        let now = new Date().getTime()
-
-        // Logging the difference
-        // between previously
-        // called and current called timings
-        console.log(now - prev, delay)
-
-        // If difference is greater
-        // than delay call
-        // the function again.
-        if (now - prev > delay) {
-            prev = now
-
-            // "..." is the spread
-            // operator here
-            // returning the function with the
-            // array of arguments
-            return func(...args)
-        }
-    }
-}
-
 function onWindowResize() {
     camera.aspect = window.innerWidth / window.innerHeight
     camera.updateProjectionMatrix()
@@ -198,7 +147,6 @@ function onWindowResize() {
 function animate() {
     controls.update() // only required if controls.enableDamping = true, or if controls.autoRotate = true
 
-    // throttleFunction(render(), 1000)
     render()
 }
 
@@ -212,9 +160,10 @@ function staticCube() {
         let y = b.substring(b.lastIndexOf("-") + 1)
         let c = b.substring(0, b.lastIndexOf("-"))
         let x = c.substring(c.lastIndexOf("e") + 1)
+
         if (obj.name.includes(`Cube${x}-${y}-${z}`)) {
             let i = parseInt(x) * 256 + parseInt(y) * 16 + parseInt(z)
-            // console.log("i val: " + i)
+
             if (colors.substring(i * 6, i * 6 + 6) == "000000") {
                 obj.material = new THREE.MeshPhongMaterial({
                     color: parseInt("0x" + colors.substring(i * 6, i * 6 + 6)),
@@ -244,11 +193,12 @@ function updateCube() {
         let y = b.substring(b.lastIndexOf("-") + 1)
         let c = b.substring(0, b.lastIndexOf("-"))
         let x = c.substring(c.lastIndexOf("e") + 1)
+
         if (obj.name.includes(`Cube${x}-${y}-${z}`)) {
             let i = parseInt(x) * 256 + parseInt(y) * 16 + parseInt(z)
             let colorIndexFrom = i * 6 + frame * 4096 * 6
             let colorIndexTo = i * 6 + 6 + frame * 4096 * 6
-            // console.log("i val: " + i)
+
             if (colors.substring(colorIndexFrom, colorIndexTo) == "000000") {
                 obj.material = new THREE.MeshPhongMaterial({
                     color: parseInt(
@@ -268,9 +218,9 @@ function updateCube() {
             }
         }
     })
+
     frame += 1
     if (frame >= maxFrames) frame = 0
-    // console.log("New frame")
 }
 
 let prev = 0

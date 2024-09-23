@@ -1,8 +1,10 @@
-# React + Vite
+# Led Cube Animator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a website to simulate a 16x16x16 Led Cube.
 
-Currently, two official plugins are available:
+Sometime in the future you will be able to interact with it.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Libraries
+
+-   [three.js](https://threejs.org)
+-   [react-gh-pages](https://github.com/gitname/react-gh-pages)
