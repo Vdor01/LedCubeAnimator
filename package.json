@@ -2,7 +2,7 @@
   "name": "ledcubeanimator",
   "private": true,
   "version": "0.0.0",
-  "homapage": "https://vdor01.github.io/LedCubeAnimator/",
+  "homepage": "https://vdor01.github.io/LedCubeAnimator/",
   "type": "module",
   "scripts": {
     "predeploy": "npm run build",
